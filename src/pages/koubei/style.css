@@ -1,0 +1,19 @@
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem
+}
+.more {
+  display: block;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  text-align: center;
+}
+.listItem {
+  padding: 0.4rem;
+  border-bottom: 0.01rem solid #eee;
+}
+.listItem > h4 {
+  margin: 0
+}

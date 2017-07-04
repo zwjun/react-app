@@ -18,7 +18,7 @@ export const Example = (props) => {
       />
 
       {/*body container*/}
-      <div style={{ flex: 1, backgroundColor: '#fff' }}>
+      <div style={{ flex: 1, backgroundColor: '#fff', textAlign: 'center' }}>
         <div style={{ paddingTop: 60 }}>你已点击“{props.pageText}” tab， 当前展示“{props.pageText}”信息</div>
         <a href="#javascript:;"
           style={{ display: 'block', marginTop: 40, color: '#108ee9' }}

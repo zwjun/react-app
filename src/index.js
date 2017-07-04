@@ -8,9 +8,10 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 //监听state变化
-store.subscribe(() => {
-    console.log('store chang', store.getState())
-});
+// store.subscribe(() => {
+//     console.log('store change', store.getState())
+// });
+//const store = configureStore();
 
 const Root = () => (
   <Provider store={store}>

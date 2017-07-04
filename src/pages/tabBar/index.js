@@ -32,7 +32,6 @@ class TabBarComponent extends Component {
   }
 
   onPress = (e) => {
-    console.log('123');
     e.preventDefault();
     this.setState({
       hidden: !this.state.hidden,
@@ -68,9 +67,9 @@ class TabBarComponent extends Component {
           });
         }}
       >
-        <Component 
+        <Component
           pageText={item.title}
-          onPress={this.onPress} 
+          onPress={this.onPress}
         />
       </TabBar.Item>
     );

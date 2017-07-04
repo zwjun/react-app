@@ -6,6 +6,13 @@ const store = createStore(
       reducer,
       applyMiddleware(thunk)
     );
-// const state = store.getState();
-// console.log(state);
+
 export default store;
+/*export default () => {
+  // 根据 reducer 初始化 store
+    const store = createStore(
+      reducer,
+      applyMiddleware(thunk)
+      );
+    return store;
+}*/

@@ -1,23 +1,27 @@
+/*
+ * @Author: JUN
+ * @Date: 2017-07-03 16:05:29 
+ */
+
 import React from 'react';
-//import PropTypes from 'prop-types';
-import { NavBar, Icon } from 'antd-mobile';
 import {connect} from 'react-redux';
-//import axios from 'axios';
+import './style.css';
 
+import NavBar from './NavBar';
 import * as gank from '../../actions/gank';
-
-const Item = ({item}) => (
-  <div>
-    <img style={{width: '100%'}} src={item.url} alt="img"/>
-  </div>
-);
+import { TYPE_DATA } from './typeData';
+import GankList from './GankList'
 
 class Koubei extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      pageText: props.pageText
+      pageText: props.pageText,
+      activeKey: "1",
+      //type: 1,
+      count: 20,
+      page: 1,
     }
   }
 
@@ -34,56 +38,55 @@ class Koubei extends React.Component {
         console.log(error);
       });*/
 
-    this.props.dispatch(gank.requestGetGank());
+    this.fetchData()
   }
-  //http://gank.io/api/search/query/listview/category/福利/count/20/page/1
-  /*componentDidMount() {
-    fetch('http://gank.io/api/search/query/listview/category/福利/count/20/page/8')//请求地址  
-      .then((response) => response.json())//取数据  
-      .then((response) => {//处理数据  
-          //通过setState()方法重新渲染界面  
-          this.setState({  
-              //改变加载ListView  
-              isLoading: false,  
-              //设置数据源刷新界面  
-              results: response.results  
-          })  
-          console.log(response)
-      })  
-      .catch((error) => {  
-          console.warn(error);  
-      })  
-  }*/
 
-  /*renderItem(item) {
+  fetchData = () => {
+    const {type} = this.props;
+    console.log(type);
+    //获取typeName
+    const index = TYPE_DATA.findIndex((e) => e.typeId === type);
+    const typeName = TYPE_DATA[index].typeName;
+
+    const {count, page} = this.state;
+
     return (
-      <div key={item.ganhuo_id}>
-        <img style={{width: '100%'}} src={item.url} alt="img"/>
-      </div>
-    )
-  }*/
+      this.props.dispatch(gank.requestGetGank(typeName, count, page))
+    );
+  }
+
+  handleTabClick = (e) => {
+    const type = parseInt(e, 10)
+    this.props.dispatch(gank.changeType(type));
+    //bug 暂时为解决（type的值没有及时更新）
+    setTimeout(() => this.fetchData(), 10)
+  }
+
+  handMoreClick = (e) => {
+    e.preventDefault();
+    console.log('123')
+  }
 
   render () {
     return (
-      <div style={{ flex: 1 }}>
-        <NavBar 
-          mode="dark"
-          iconName={null}
-          leftContent={this.state.pageText}
-          rightContent={[
-            <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
-            <Icon key="1" type="ellipsis" />,
-          ]}
-        />
-        {/*{this.state.results.map((res) => this.renderItem(res))}*/}
-        {this.props.results.map((res) => <Item  key={res.ganhuo_id} item={res} />)}
+      <div className="container">
+        <NavBar activeKey={this.state.activeKey} handleTabClick={this.handleTabClick} />
+
+        <div className="content" >
+          {/*{this.props.results.map((res) => 
+            <Item key={res._id} item={res} />
+          )}*/}
+          <GankList data={this.props.results} type={this.props.type}/>
+          <a className="more" onClick={this.handMoreClick}>more...</a>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-   results: state.gank.results
+   results: state.gank.results,
+   type: state.gank.type
 });
 
 export default connect( mapStateToProps )(Koubei);
