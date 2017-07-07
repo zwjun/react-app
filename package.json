@@ -5,9 +5,11 @@
   "dependencies": {
     "antd-mobile": "^1.4.0",
     "axios": "^0.16.2",
+    "history": "^4.6.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0"
   },

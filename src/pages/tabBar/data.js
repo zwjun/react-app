@@ -1,5 +1,6 @@
 import Koubei from '../koubei';
 import Example from '../example';
+import UsereInfo from '../UserCenter'
 
 export const TAB_BATA = [{
   id: 1,
@@ -32,5 +33,5 @@ export const TAB_BATA = [{
   dot: false,
   icon: require('./icons/rmb-o.svg'),
   selectedIcon: require('./icons/rmb.svg'),
-  component: Example
+  component: UsereInfo
 }];

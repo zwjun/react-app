@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TabBar, Icon } from 'antd-mobile';
 import './style.css';
 import { TAB_BATA } from './data';
+import { Route } from 'react-router-dom';
 
 class TabBarComponent extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class TabBarComponent extends Component {
        TAB_BATA[1].badge = true;
     }
     if(message) {
-       TAB_BATA[2].dot = true;
+      TAB_BATA[2].dot = true;
     }
 
     this.setState({

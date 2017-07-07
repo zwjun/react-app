@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/configureStore';
-//import App from './App';
-import TabBar from './pages/tabBar';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
@@ -15,7 +14,7 @@ import './index.css';
 
 const Root = () => (
   <Provider store={store}>
-    <TabBar />
+    <App />
   </Provider>
 );
 

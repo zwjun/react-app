@@ -26,18 +26,6 @@ class Koubei extends React.Component {
   }
 
   componentDidMount() { //加载数据比较块！！！
-    /*axios.get('http://gank.io/api/search/query/listview/category/福利/count/10/page/1')
-      .then((response) => {
-        //console.log(response.data);
-        this.setState({  
-          isLoading: false,  
-          results: response.data.results
-        })  
-      })
-      .catch((error) => {
-        console.log(error);
-      });*/
-
     this.fetchData()
   }
 
@@ -73,9 +61,6 @@ class Koubei extends React.Component {
         <NavBar activeKey={this.state.activeKey} handleTabClick={this.handleTabClick} />
 
         <div className="content" >
-          {/*{this.props.results.map((res) => 
-            <Item key={res._id} item={res} />
-          )}*/}
           <GankList data={this.props.results} type={this.props.type}/>
           <a className="more" onClick={this.handMoreClick}>more...</a>
         </div>

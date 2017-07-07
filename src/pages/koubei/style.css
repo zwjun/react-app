@@ -1,9 +1,4 @@
 
-.content {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 1rem
-}
 .more {
   display: block;
   padding-top: 0.3rem;
@@ -12,7 +7,7 @@
 }
 .listItem {
   padding: 0.4rem;
-  border-bottom: 0.01rem solid #eee;
+  border-bottom: 0.005rem solid #ddd;
 }
 .listItem > h4 {
   margin: 0

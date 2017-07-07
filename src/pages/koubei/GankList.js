@@ -7,13 +7,15 @@ const GankList = (props) => {
     <div>
       {props.data.map((e) => {
         if(props.type === 1) {
-          return <img style={{width: '100%'}} src={e.url} alt="img"/>
+          return <img key={e._id} style={{width: '100%'}} src={e.url} alt="img"/>
         }
         if(props.type === 2 || 3 || 4) {
           return (
-            <div className="listItem">
-              <h4>{e.desc}</h4>
-            </div>
+            <a key={e._id} href={e.url}>
+              <div className="listItem" style={{color: '#333'}}>
+                <h4>{e.desc}</h4>
+              </div>
+            </a>
           );
         }
         return false
