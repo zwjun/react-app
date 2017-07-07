@@ -1,0 +1,53 @@
+/*
+ * @Author: JUN 
+ * @Date: 2017-07-07 15:43:31 
+ */
+.container {
+  background-color: #fff;
+}
+
+.accountContent {
+  padding-top: 1rem;
+}
+
+.loginButton {
+  padding-left: .2rem;
+  padding-right: .2rem;
+  padding-top: .5rem;
+  padding-bottom: .4rem
+}
+
+.separator {
+  display: inline-block;
+  width: .02rem;
+  height: .2rem;
+  margin-left: .3rem;
+  margin-right: .3rem;
+}
+
+.striping {
+  flex: 1;
+  height: .01rem;
+}
+
+.thirdPartyTitle {
+  display: flex;
+  line-height: 0;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+}
+
+.lineColor {
+  background-color: #ccc;
+}
+
+.thirdPartyIcon {
+  text-align: center;
+}
+
+.thirdPartyIcon img {
+  width: .8rem;
+  height: .8rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
