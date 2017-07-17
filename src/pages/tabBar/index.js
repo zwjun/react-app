@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TabBar, Icon } from 'antd-mobile';
+import {connect} from 'react-redux';
 import './style.css';
 import { TAB_BATA } from './data';
-import { Route } from 'react-router-dom';
+import * as onClickTab from '../../actions/onClickTab';
 
 class TabBarComponent extends Component {
   constructor(props) {
@@ -32,11 +33,15 @@ class TabBarComponent extends Component {
     });
   }
 
-  onPress = (e) => {
+  isShowTabBar = (e) => {
     e.preventDefault();
     this.setState({
       hidden: !this.state.hidden,
     });
+  }
+
+  onPressTabBar(status) {
+    this.props.dispatch(onClickTab.selectedTab(status))
   }
 
   renderBadge(props) {
@@ -61,16 +66,13 @@ class TabBarComponent extends Component {
         key={item.id}
         badge={this.renderBadge(item.badge)}
         dot={this.renderDot(item.dot)}
-        selected={this.state.selectedTab === item.id}
-        onPress={() => {
-          this.setState({
-            selectedTab: item.id,
-          });
-        }}
+        selected={this.props.status === item.id}
+        onPress={() => this.onPressTabBar(item.id)}
+        
       >
         <Component
           pageText={item.title}
-          onPress={this.onPress}
+          onPress={this.isShowTabBar}
         />
       </TabBar.Item>
     );
@@ -90,4 +92,8 @@ class TabBarComponent extends Component {
   }
 }
 
-export default TabBarComponent;
+const mapStateToProps = (state) => ({
+   status: state.navBar.status,
+});
+
+export default connect( mapStateToProps )(TabBarComponent);
