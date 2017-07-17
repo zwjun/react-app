@@ -23,7 +23,7 @@ class PasswordLogin extends Component {
           </InputItem>
         </List>
         <div className="loginButton">
-          <Button className="btn" type="primary">登录</Button>
+          <Button className="btn" type="primary" onClick={() => this.props.history.goBack()} >登录</Button>
         </div>
       </div>
     )

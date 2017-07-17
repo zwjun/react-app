@@ -22,7 +22,7 @@ class UserInfo extends Component {
               pathname: '/login',
               search: '?sort=name',
               hash: '#the-hash',
-              state: { fromDashboard: true }
+              state: { showNavBar: true }
             }}>
               登录/注册>
             </Link>

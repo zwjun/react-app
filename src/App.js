@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import TabBar from './pages/tabBar';
 import Login from './pages/account/Login';
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory()
 
 class App extends Component {
   constructor (props) {
@@ -13,7 +16,7 @@ class App extends Component {
   
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <Switch>
           {/*重定向，做登录判断*/}
           <Route exact path="/" render={() => (

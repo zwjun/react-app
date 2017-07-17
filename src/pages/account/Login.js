@@ -4,8 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Tabs, WhiteSpace, Flex } from 'antd-mobile';
+import { NavBar, Tabs, Flex } from 'antd-mobile';
 import './style.css';
 import PasswordLogin from './PasswordLogin';
 import CodeLogin from './CodeLogin';
@@ -16,27 +15,52 @@ class Login extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeCompontent: "1"
+      activeCompontent: "1",
+      showNavBar: false
     }
   }
+
+  componentDidMount() {
+    const state = this.props.location.state;
+    if(state) {
+      this.setState({showNavBar: state.showNavBar})
+    }
+  }
+
   handleTabClick = (key) => { 
     console.log(key);
     this.setState({
       activeCompontent: key
     })
   }
-  
 
+  goBack() {
+    const history = this.props.history;
+    history.goBack()
+  }
+  
   render () {
+    // console.log('====================================');
+    // console.log(this.props);
+    // console.log('====================================');
     return (
       <div className="container">
+        {/*header*/}
+        { this.state.showNavBar 
+          ? <NavBar 
+              mode="dark"
+              iconName="cross"
+              leftContent={this.props.pageText}
+              onLeftClick={() => this.goBack()}
+            />
+          : null }
         <Tabs defaultActiveKey="1" onTabClick={(key) => this.handleTabClick(key)}>
           <Tabs.TabPane tab="密码登录" key="1" />
           <Tabs.TabPane tab="验证码登录" key="2" />
         </Tabs>
         { this.state.activeCompontent === '1' 
-          ? <PasswordLogin />
-          : <CodeLogin />
+          ? <PasswordLogin {...this.props} />
+          : <CodeLogin {...this.props} />
         }
         <Flex justify="center">
           <span>注册新用户</span>
@@ -51,18 +75,13 @@ class Login extends Component {
             <span className="striping lineColor" />
           </div>
           <div className="thirdPartyIcon">
-            <a href="#"><img src={qqIcon} alt=""/></a>
-            <a href="#"><img src={weiboIcon} alt=""/></a>
+            <a><img src={qqIcon} alt=""/></a>
+            <a><img src={weiboIcon} alt=""/></a>
           </div>
         </div>
-        
       </div>
     )
   }
-}
-
-Login.propTypes = {
-
 }
 
 export default Login

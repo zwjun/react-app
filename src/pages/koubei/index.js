@@ -26,12 +26,11 @@ class Koubei extends React.Component {
   }
 
   componentDidMount() { //加载数据比较块！！！
-    this.fetchData()
+    const {type} = this.props;
+    this.fetchData(type)
   }
 
-  fetchData = () => {
-    const {type} = this.props;
-    console.log(type);
+  fetchData = (type) => {
     //获取typeName
     const index = TYPE_DATA.findIndex((e) => e.typeId === type);
     const typeName = TYPE_DATA[index].typeName;
@@ -47,7 +46,7 @@ class Koubei extends React.Component {
     const type = parseInt(e, 10)
     this.props.dispatch(gank.changeType(type));
     //bug 暂时为解决（type的值没有及时更新）
-    setTimeout(() => this.fetchData(), 10)
+    //setTimeout(() => this.fetchData(), 10)
   }
 
   handMoreClick = (e) => {
@@ -67,6 +66,17 @@ class Koubei extends React.Component {
       </div>
     );
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('====================================');
+    console.log(this.props.type);
+    console.log(nextProps.type);
+    console.log('====================================');
+    if(this.props.type !== nextProps.type) {
+      this.fetchData(nextProps.type)
+    }
+  }
+
 }
 
 const mapStateToProps = (state) => ({

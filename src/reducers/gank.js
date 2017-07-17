@@ -12,7 +12,7 @@ const gank = (state = initalState, action) => {
   switch (type) {
     case actionTypes.GANK_RECEIVE_RESULTS: 
       //return Object.assign({}, state, { results: payload.results });
-      console.log('typeChange', payload.results);
+      //console.log('typeChange', payload.results);
       return {
         ...state,
         results: payload.results
