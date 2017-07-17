@@ -36,3 +36,9 @@ body {
   overflow-y: auto;
   margin-bottom: 1rem
 }
+.loading {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  display: flex;
+  justify-content: center;
+}

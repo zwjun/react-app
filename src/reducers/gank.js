@@ -10,6 +10,11 @@ const gank = (state = initalState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actionTypes.GANK_CLEAR_RESULTS:
+      return {
+        ...state,
+        results: []
+      }
     case actionTypes.GANK_RECEIVE_RESULTS: 
       //return Object.assign({}, state, { results: payload.results });
       //console.log('typeChange', payload.results);
