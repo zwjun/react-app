@@ -22,47 +22,52 @@ class Koubei extends React.Component {
       activeKey: "1",
       //type: 1,
       count: 20,
-      page: 1,
+      page: 0,
     }
   }
 
   componentWillMount() {
     
   }
+
   componentDidMount() { //加载数据比较块！！！
-    const {type} = this.props;
-    this.fetchData(type);
+    this.fetchData(this.props.type);
   }
 
-  fetchData = (type) => {
-    this.setState({ isLoading: true});
+  fetchData = (type, page=this.state.page, isLoading=true) => {
+    ++page;
+    this.setState({ 
+      isLoading
+    });
     //获取typeName
     const index = TYPE_DATA.findIndex((e) => e.typeId === type);
     const typeName = TYPE_DATA[index].typeName;
-
-    const {count, page} = this.state;
+    const {count} = this.state;
 
     return (
       this.props.dispatch(gank.requestGetGank(typeName, count, page))
         .then((data) => {
-          this.setState({ isLoading: false});
-          console.log('====================================');
-          console.log(data);
-          console.log('====================================');
+          this.setState((prevState, props) => {
+            return {
+              isLoading: false,
+              page
+            }
+          });
+          // console.log('====================================');
+          // console.log(data);
+          // console.log('====================================');
         })
     );
   }
 
   handleTabClick = (e) => {
+    this.setState({ page: 0})
     const type = parseInt(e, 10)
     this.props.dispatch(gank.changeType(type));
-    //bug 暂时为解决（type的值没有及时更新）
-    //setTimeout(() => this.fetchData(), 10)
   }
 
-  handMoreClick = (e) => {
-    e.preventDefault();
-    console.log('123')
+  MoreOnClick = (e) => {
+    this.fetchData(this.props.type, this.state.page, false)
   }
 
   renderActivityIndicator() {
@@ -85,7 +90,7 @@ class Koubei extends React.Component {
           ? this.renderActivityIndicator()
           : <div>
               <GankList data={this.props.results} type={this.props.type}/>
-              <a className="more" onClick={this.handMoreClick}>more...</a>
+              <a className="more" onClick={this.MoreOnClick}>more...</a>
             </div>}
         </div>
       </div>
@@ -101,7 +106,7 @@ class Koubei extends React.Component {
     
     if(this.props.type !== nextProps.type) {
       this.props.dispatch(gank.clearResults());
-      this.fetchData(nextProps.type)
+      this.fetchData(nextProps.type, 0)
     }
   }
 

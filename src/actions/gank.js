@@ -42,7 +42,7 @@ export const requestGetGank = (type, count, page) => {
         .then((response) => {
           if(!response.error) {
             dispatch(receiveGank(response.data));
-            if(resolved) resolved(response.data);
+            if(resolved) resolved();
           }
         })
         .catch(error => console.log(error))
